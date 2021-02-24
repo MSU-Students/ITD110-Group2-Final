@@ -1,0 +1,23 @@
+{
+  "name": "itd110-group2-final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MSU-Students/ITD110-Group2-Final.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MSU-Students/ITD110-Group2-Final/issues"
+  },
+  "homepage": "https://github.com/MSU-Students/ITD110-Group2-Final#readme",
+  "dependencies": {
+    "level": "^6.0.1",
+    "prompt-sync": "^4.2.0"
+  }
+}
