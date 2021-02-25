@@ -29,4 +29,28 @@ async function scheduleInterview(stId, scheduleDate){
         console.log('\nInterview date: ' + scheduleDate);
         console.log('Status: ' + status[1]);
     })
+    scheduleExam(stId, scheduleDate);
+}
+async function scheduleExam(stId, scheduleDate){
+    db.get(stId, function(err, value){
+        var examDate = 'March 1, 2021';
+        console.log('\nExam date on ' + examDate);
+        console.log('Status: ' + status[2]);
+    })
+    rateEntranceExam(stId, status);
+}
+
+async function rateEntranceExam(stId, status){
+    var examScore = Math.random() * (120 - 40) + 40;
+    examScore = examScore.toFixed();
+    await db.get(stId, function(err, value){
+        if(examScore >= 70){
+            console.log('\nExam score is ' + examScore);
+            console.log('Status: '+ status[3]);
+        } else{
+            console.log('\nExam score is ' + examScore);
+            console.log('Status: ' + status[4]);
+        }
+    })
+    
 }
