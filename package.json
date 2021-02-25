@@ -1,7 +1,7 @@
 {
   "name": "itd110-group2-final",
   "version": "1.0.0",
-  "description": "",
+  "description": "Serad, Basam C.\r Amenodin, Zhyne A.\r Bantuas, Abdullah G.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
