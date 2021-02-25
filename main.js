@@ -29,4 +29,12 @@ async function scheduleInterview(stId, scheduleDate){
         console.log('\nInterview date: ' + scheduleDate);
         console.log('Status: ' + status[1]);
     })
+    scheduleExam(stId, scheduleDate);
+}
+async function scheduleExam(stId, scheduleDate){
+    db.get(stId, function(err, value){
+        var examDate = 'March 1, 2021';
+        console.log('\nExam date on ' + examDate);
+        console.log('Status: ' + status[2]);
+    })
 }
