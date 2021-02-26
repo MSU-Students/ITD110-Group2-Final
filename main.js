@@ -54,3 +54,15 @@ async function rateEntranceExam(stId, status){
     })
     
 }
+
+deleteStudent(stId);
+async function deleteStudent(stId){
+    await db.del(stId)
+    db.get(stId, function(err, value){
+        if(err){
+            console.log('\nData is deleted');
+        } else{
+            console.log(value); 
+        }
+    })
+}
