@@ -1,6 +1,6 @@
 const level = require('level');
 
-(function main() {
+(async function main() {
     const db = connectToDatabase('./Student-db');
 }());
 
