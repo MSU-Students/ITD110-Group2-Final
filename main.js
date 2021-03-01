@@ -112,7 +112,7 @@ async function rateEntranceExam(db, ID, examScore){
         } else{
             student.status = 'Probationary';
         }
-        db.put(ID, student);
+        await db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
     }
