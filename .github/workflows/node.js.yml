@@ -13,12 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [15.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -27,3 +25,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: node ./main.js accept 1234 John 21 MSU
+    - run: node ./main.js sched-interview 1234 "March 1"
+    - run: node ./main.js sched-exam 1234 "March 5"
+    - run: node ./main.js list
