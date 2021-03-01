@@ -26,4 +26,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: node ./main.js
+    - run: node ./main.js accept 1234 John 21 MSU
