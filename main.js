@@ -1,6 +1,6 @@
 const level = require('level');
 
-(async function main() {
+(function main() {
     const db = connectToDatabase('./Student-db');
     const args = process.argv.splice(2);
     let ID;
@@ -22,11 +22,16 @@ const level = require('level');
             const examdSched = args[2];
             scheduleExam(db, ID, examdSched);
             break;
+        case 'rate-exam':
+            ID = args[1];
+            const score = args[2];
+            rateEntranceExam(db, ID, score);
+            break;
         case 'list':
             listAllStudents(db);
             break;
         default:
-            console.log('Commands:', 'accept', 'list');
+            console.log('Commands:', 'accept', 'list', 'sched-interview', 'sched-exam', 'rate-exam');
     }
 }());
 
@@ -60,7 +65,7 @@ async function listAllStudents(db) {
         if (nextKeyValue) {
             const student = nextKeyValue.value;
             console.log('\nID No.: ',student.ID,'\nFullname: ', student.name,'\nAge: ', student.age, '\nAddress: ', student.address, 
-            '\nStatus: ', student.status,'\nInterview Date: ', student.interviewSched,'\nExam Date:', student.examdSched);
+            '\nStatus: ', student.status,'\nInterview Date: ', student.interviewSched,'\nExam Date:', student.examdSched,'\nExam Score: ', student.score);
         }
     } while (nextKeyValue);
 }
@@ -75,21 +80,38 @@ async function acceptStudent(db, ID, studentName, studentAge, studentAddress) {
     };
     return await db.put(ID, studentInfo);
 }
+
 async function scheduleInterview(db, ID, ScheduleDate) {
     try {
         const student =  await db.get(ID);
         student.interviewSched = ScheduleDate;
         student.status = 'Under Interview';
-        await db.put(ID, student);
+        db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
     }
 }
+
 async function scheduleExam(db, ID, ScheduleDate){
     try {
         const student = await db.get(ID);
         student.examdSched = ScheduleDate;
         student.status = 'Exam Pending';
+        await db.put(ID, student);
+    } catch (error) {
+        console.log('The ID', ID ,'you entered is not existing');
+    }
+}
+
+async function rateEntranceExam(db, ID, examScore){
+    try {
+        const student = await db.get(ID);
+        student.score = examScore;
+        if(examScore >= 70){
+            student.status = 'Admitted';
+        } else{
+            student.status = 'Probationary';
+        }
         await db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
