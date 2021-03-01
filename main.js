@@ -62,5 +62,5 @@ async function acceptStudent(db, ID, studentName, studentAge, studentAddress) {
         address: studentAddress,
         status: 'Applying'
     };
-    return db.put(ID, studentInfo);
+    return await db.put(ID, studentInfo);
 }
