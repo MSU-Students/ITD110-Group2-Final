@@ -17,6 +17,11 @@ const level = require('level');
             const interviewSched = args[2];            
             scheduleInterview(db, ID, interviewSched);
             break;
+        case 'sched-exam':
+            ID = args[1];
+            const examdSched = args[2];
+            scheduleExam(db, ID, examdSched);
+            break;
         case 'list':
             listAllStudents(db);
             break;
@@ -54,7 +59,8 @@ async function listAllStudents(db) {
         nextKeyValue = await getNext(iterator);
         if (nextKeyValue) {
             const student = nextKeyValue.value;
-            console.log('\nID No.: ',student.ID,'\nFullname: ', student.name,'\nAge: ', student.age, '\nAddress: ', student.address,    '\nStatus: ', student.status);
+            console.log('\nID No.: ',student.ID,'\nFullname: ', student.name,'\nAge: ', student.age, '\nAddress: ', student.address, 
+            '\nStatus: ', student.status,'\nInterview Date: ', student.interviewSched,'\nExam Date:', student.examdSched);
         }
     } while (nextKeyValue);
 }
@@ -74,6 +80,16 @@ async function scheduleInterview(db, ID, ScheduleDate) {
         const student =  await db.get(ID);
         student.interviewSched = ScheduleDate;
         student.status = 'Under Interview';
+        await db.put(ID, student);
+    } catch (error) {
+        console.log('The ID', ID ,'you entered is not existing');
+    }
+}
+async function scheduleExam(db, ID, ScheduleDate){
+    try {
+        const student = await db.get(ID);
+        student.examdSched = ScheduleDate;
+        student.status = 'Exam Pending';
         await db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
