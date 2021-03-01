@@ -27,4 +27,5 @@ jobs:
     - run: node ./main.js accept 1234 John 21 MSU
     - run: node ./main.js sched-interview 1234 "March 1"
     - run: node ./main.js sched-exam 1234 "March 5"
+    - run: node ./main.js rate-exam 1234 90
     - run: node ./main.js list
