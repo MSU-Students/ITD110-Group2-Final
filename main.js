@@ -97,7 +97,7 @@ async function scheduleExam(db, ID, ScheduleDate){
         const student = await db.get(ID);
         student.examdSched = ScheduleDate;
         student.status = 'Exam Pending';
-        db.put(ID, student);
+        await db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
     }
