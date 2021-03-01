@@ -27,11 +27,15 @@ const level = require('level');
             const score = args[2];
             rateEntranceExam(db, ID, score);
             break;
+        case 'delete':
+            del = args[1];
+            deleteStudent(db,del);
+            break;
         case 'list':
             listAllStudents(db);
             break;
         default:
-            console.log('Commands:', 'accept', 'list', 'sched-interview', 'sched-exam', 'rate-exam');
+            console.log('Commands:', 'accept', 'list', 'sched-interview', 'sched-exam', 'rate-exam', 'delete');
     }
 }());
 
@@ -115,5 +119,16 @@ async function rateEntranceExam(db, ID, examScore){
         await db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
+    }
+}
+
+async function deleteStudent(db,ID){
+    try {
+        const student = await db.get(ID);
+        student.del = ID;
+        db.del(ID);
+        console.log('Student data was deleted.');
+    } catch (error) {
+        console.log('Invalid ID',ID);
     }
 }
