@@ -86,7 +86,7 @@ async function scheduleInterview(db, ID, ScheduleDate) {
         const student =  await db.get(ID);
         student.interviewSched = ScheduleDate;
         student.status = 'Under Interview';
-        db.put(ID, student);
+        await db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
     }
@@ -97,7 +97,7 @@ async function scheduleExam(db, ID, ScheduleDate){
         const student = await db.get(ID);
         student.examdSched = ScheduleDate;
         student.status = 'Exam Pending';
-        db.put(ID, student);
+        await db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
     }
@@ -112,7 +112,7 @@ async function rateEntranceExam(db, ID, examScore){
         } else{
             student.status = 'Probationary';
         }
-        db.put(ID, student);
+        await db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
     }
