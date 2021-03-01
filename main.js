@@ -67,14 +67,14 @@ async function acceptStudent(db, ID, studentName, studentAge, studentAddress) {
         address: studentAddress,
         status: 'Applying'
     };
-    return db.put(ID, studentInfo);
+    return await db.put(ID, studentInfo);
 }
 async function scheduleInterview(db, ID, ScheduleDate) {
     try {
         const student =  await db.get(ID);
         student.interviewSched = ScheduleDate;
         student.status = 'Under Interview';
-        db.put(ID, student);
+        await db.put(ID, student);
     } catch (error) {
         console.log('The ID', ID ,'you entered is not existing');
     }
